@@ -1,0 +1,584 @@
+INFO  time: initialize in 0.93s
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+set 27, 2019 12:22:52 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleNotification
+ADVERTÊNCIA: Notification threw an exception: {
+  "jsonrpc": "2.0",
+  "method": "textDocument/didOpen",
+  "params": {
+    "textDocument": {
+      "uri": "file:///c%3A/Users/Asus/Desktop/invilia/code/scalaRestExample/scalatra/scalarestwebapp/src/test/scala/com/example/javacodegeeks/scala/rest/MyScalatraServletSpec.scala",
+      "languageId": "scala",
+      "version": 4,
+      "text": "package com.apirest.acme.scala.rest\r\n\r\nimport org.scalatra.test.specs2._\r\n\r\n// For more on Specs2, see http://etorreborre.github.com/specs2/guide/org.specs2.guide.QuickStart.html\r\nclass MyScalatraServletSpec extends ScalatraSpec { def is \u003d\r\n  \"GET / on MyScalatraServlet\"                     ^\r\n    \"should return status 200\"                  ! root200^\r\n                                                end\r\n\r\n  addServlet(classOf[MyScalatraServlet], \"/*\")\r\n\r\n  def root200 \u003d get(\"/\") {\r\n    status must_\u003d\u003d 200\r\n  }\r\n}\r\n"
+    }
+  }
+}
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$null$0(GenericEndpoint.java:67)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.notify(GenericEndpoint.java:152)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleNotification(RemoteEndpoint.java:220)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:187)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:194)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:94)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:113)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$null$0(GenericEndpoint.java:65)
+	... 11 more
+Caused by: java.nio.file.NoSuchFileException: c:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\test\scala\com\example\javacodegeeks\scala\rest\MyScalatraServletSpec.scala
+	at sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:79)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:97)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:102)
+	at sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:230)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.Files.newByteChannel(Files.java:407)
+	at java.nio.file.Files.readAllBytes(Files.java:3152)
+	at scala.meta.internal.io.PlatformFileIO$.slurp(PlatformFileIO.scala:45)
+	at scala.meta.internal.io.FileIO$.slurp(FileIO.scala:24)
+	at scala.meta.internal.metals.MetalsLanguageServer.didOpen(MetalsLanguageServer.scala:599)
+	... 16 more
+
+set 27, 2019 12:22:52 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleNotification
+ADVERTÊNCIA: Notification threw an exception: {
+  "jsonrpc": "2.0",
+  "method": "textDocument/didOpen",
+  "params": {
+    "textDocument": {
+      "uri": "file:///c%3A/Users/Asus/Desktop/invilia/code/scalaRestExample/scalatra/scalarestwebapp/src/main/scala/com/example/javacodegeeks/scala/rest/Customer.scala",
+      "languageId": "scala",
+      "version": 2,
+      "text": "\npackage com.example.acme.scala.rest\n\n//JSON related libraries\nimport org.json4s.{DefaultFormats, Formats}\n\n//JSON handling support from Scalatra\nimport org.scalatra.json._\n\n// JSON library for converting the POJO toString as Json\nimport org.json4s.native.Json\n\nclass Customer(val id:Int, var firstName:String, var lastName:String) {                                   \n                                                                                              \n        println(\"Customer - Constructor  BEGIN .... \")\n\n\tdef this(firstName:String, lastName:String) {\n\t\tthis(Customer.inc, firstName, lastName)\n\t}\n                                                                                              \n        //override def toString \u003d s\"Customer [Id\u003d$id, FirstName\u003d$firstName, LastName\u003d$lastName]\"\n\n\toverride def toString \u003d Json(DefaultFormats).write(this) \n\n\tprintln(\"Customer - Constructor END .... \")\n}                                                                                             \n                                                                                              \nobject Customer {                                                                             \n\tprivate var id \u003d 0                                                                    \n                                                                                              \n        private def inc \u003d {   \n\t       println(\" ****** Inc method called, id \u003d \" + id)\n       \t        id +\u003d 1;                                                                      \n               \tid                                                                            \n        }                                                                                     \n}                                                                                              \n"
+    }
+  }
+}
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$null$0(GenericEndpoint.java:67)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.notify(GenericEndpoint.java:152)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleNotification(RemoteEndpoint.java:220)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:187)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:194)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:94)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:113)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$null$0(GenericEndpoint.java:65)
+	... 11 more
+Caused by: java.nio.file.NoSuchFileException: c:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\example\javacodegeeks\scala\rest\Customer.scala
+	at sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:79)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:97)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:102)
+	at sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:230)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.Files.newByteChannel(Files.java:407)
+	at java.nio.file.Files.readAllBytes(Files.java:3152)
+	at scala.meta.internal.io.PlatformFileIO$.slurp(PlatformFileIO.scala:45)
+	at scala.meta.internal.io.FileIO$.slurp(FileIO.scala:24)
+	at scala.meta.internal.metals.MetalsLanguageServer.didOpen(MetalsLanguageServer.scala:599)
+	... 16 more
+
+set 27, 2019 12:22:52 AM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleNotification
+ADVERTÊNCIA: Notification threw an exception: {
+  "jsonrpc": "2.0",
+  "method": "textDocument/didOpen",
+  "params": {
+    "textDocument": {
+      "uri": "file:///c%3A/Users/Asus/Desktop/invilia/code/scalaRestExample/scalatra/scalarestwebapp/src/main/scala/com/example/javacodegeeks/scala/rest/ScalarestwebappStack.scala",
+      "languageId": "scala",
+      "version": 2,
+      "text": "package com.example.acme.scala.rest\r\n\r\nimport org.scalatra._\r\nimport scalate.ScalateSupport\r\nimport org.fusesource.scalate.{ TemplateEngine, Binding }\r\nimport org.fusesource.scalate.layout.DefaultLayoutStrategy\r\nimport javax.servlet.http.HttpServletRequest\r\nimport collection.mutable\r\n\r\ntrait ScalarestwebappStack extends ScalatraServlet with ScalateSupport {\r\n\r\n  notFound {\r\n    // remove content type in case it was set through an action\r\n    contentType \u003d null\r\n    // Try to render a ScalateTemplate if no route matched\r\n    findTemplate(requestPath) map { path \u003d\u003e\r\n      contentType \u003d \"text/html\"\r\n      layoutTemplate(path)\r\n    } orElse serveStaticResource() getOrElse resourceNotFound()\r\n  }\r\n\r\n}\r\n"
+    }
+  }
+}
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$null$0(GenericEndpoint.java:67)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.notify(GenericEndpoint.java:152)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleNotification(RemoteEndpoint.java:220)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:187)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:194)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:94)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:113)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$null$0(GenericEndpoint.java:65)
+	... 11 more
+Caused by: java.nio.file.NoSuchFileException: c:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\example\javacodegeeks\scala\rest\ScalarestwebappStack.scala
+	at sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:79)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:97)
+	at sun.nio.fs.WindowsException.rethrowAsIOException(WindowsException.java:102)
+	at sun.nio.fs.WindowsFileSystemProvider.newByteChannel(WindowsFileSystemProvider.java:230)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.Files.newByteChannel(Files.java:407)
+	at java.nio.file.Files.readAllBytes(Files.java:3152)
+	at scala.meta.internal.io.PlatformFileIO$.slurp(PlatformFileIO.scala:45)
+	at scala.meta.internal.io.FileIO$.slurp(FileIO.scala:24)
+	at scala.meta.internal.metals.MetalsLanguageServer.didOpen(MetalsLanguageServer.scala:599)
+	... 16 more
+
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\ScalatraBootstrap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\ScalarestwebappStack.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\project\build.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\CustomerMap.scala
+INFO  no build target: using presentation compiler with only scala-library
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\Customer.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\Store.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\CustomerMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\ScalarestwebappStack.scala
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\ScalarestwebappStack.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+set 27, 2019 12:56:53 AM scala.meta.internal.pc.CompilerAccess retryWithCleanCompiler
+INFORMAÇÕES: compiler crashed due to an error in the Scala compiler, retrying with new compiler instance.
+set 27, 2019 12:56:53 AM scala.meta.internal.pc.CompilerAccess handleError
+GRAVE: null
+java.lang.NullPointerException
+	at scala.reflect.internal.Definitions$DefinitionsClass.isByNameParamType(Definitions.scala:417)
+	at scala.reflect.internal.TreeInfo.isStableIdent(TreeInfo.scala:137)
+	at scala.reflect.internal.TreeInfo.isStableIdentifier(TreeInfo.scala:113)
+	at scala.reflect.internal.TreeInfo.isPath(TreeInfo.scala:102)
+	at scala.reflect.internal.TreeInfo.admitsTypeSelection(TreeInfo.scala:155)
+	at scala.tools.nsc.interactive.Global.stabilizedType(Global.scala:959)
+	at scala.tools.nsc.interactive.Global.typedTreeAt(Global.scala:807)
+	at scala.meta.internal.pc.SignatureHelpProvider.signatureHelp(SignatureHelpProvider.scala:22)
+
+set 27, 2019 12:57:07 AM scala.meta.internal.pc.Completions completionPosition
+GRAVE: null
+java.lang.NullPointerException
+	at scala.meta.internal.pc.Completions$CompletionPosition$Override.<init>(Completions.scala:1034)
+	at scala.meta.internal.pc.Completions.completionPositionUnsafe(Completions.scala:472)
+	at scala.meta.internal.pc.Completions.completionPositionUnsafe$(Completions.scala:393)
+	at scala.meta.internal.pc.MetalsGlobal.completionPositionUnsafe(MetalsGlobal.scala:23)
+	at scala.meta.internal.pc.Completions.completionPosition(Completions.scala:385)
+	at scala.meta.internal.pc.Completions.completionPosition$(Completions.scala:370)
+	at scala.meta.internal.pc.MetalsGlobal.completionPosition(MetalsGlobal.scala:23)
+	at scala.meta.internal.pc.CompletionProvider.safeCompletionsAt(CompletionProvider.scala:403)
+	at scala.meta.internal.pc.CompletionProvider.completions(CompletionProvider.scala:47)
+	at scala.meta.internal.pc.ScalaPresentationCompiler.$anonfun$complete$1(ScalaPresentationCompiler.scala:87)
+	at scala.meta.internal.pc.CompilerAccess.withSharedCompiler(CompilerAccess.scala:120)
+	at scala.meta.internal.pc.CompilerAccess.$anonfun$withInterruptableCompiler$1(CompilerAccess.scala:77)
+	at scala.meta.internal.pc.CompilerAccess.$anonfun$onCompilerJobQueue$1(CompilerAccess.scala:198)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:73)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+
+set 27, 2019 12:57:08 AM scala.meta.internal.pc.Completions completionPosition
+GRAVE: null
+java.lang.NullPointerException
+	at scala.meta.internal.pc.Completions$CompletionPosition$Override.<init>(Completions.scala:1034)
+	at scala.meta.internal.pc.Completions.completionPositionUnsafe(Completions.scala:472)
+	at scala.meta.internal.pc.Completions.completionPositionUnsafe$(Completions.scala:393)
+	at scala.meta.internal.pc.MetalsGlobal.completionPositionUnsafe(MetalsGlobal.scala:23)
+	at scala.meta.internal.pc.Completions.completionPosition(Completions.scala:385)
+	at scala.meta.internal.pc.Completions.completionPosition$(Completions.scala:370)
+	at scala.meta.internal.pc.MetalsGlobal.completionPosition(MetalsGlobal.scala:23)
+	at scala.meta.internal.pc.CompletionProvider.safeCompletionsAt(CompletionProvider.scala:403)
+	at scala.meta.internal.pc.CompletionProvider.completions(CompletionProvider.scala:47)
+	at scala.meta.internal.pc.ScalaPresentationCompiler.$anonfun$complete$1(ScalaPresentationCompiler.scala:87)
+	at scala.meta.internal.pc.CompilerAccess.withSharedCompiler(CompilerAccess.scala:120)
+	at scala.meta.internal.pc.CompilerAccess.$anonfun$withInterruptableCompiler$1(CompilerAccess.scala:77)
+	at scala.meta.internal.pc.CompilerAccess.$anonfun$onCompilerJobQueue$1(CompilerAccess.scala:198)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:73)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+
+set 27, 2019 12:57:08 AM scala.meta.internal.pc.Completions completionPosition
+GRAVE: null
+java.lang.NullPointerException
+	at scala.meta.internal.pc.Completions$CompletionPosition$Override.<init>(Completions.scala:1034)
+	at scala.meta.internal.pc.Completions.completionPositionUnsafe(Completions.scala:472)
+	at scala.meta.internal.pc.Completions.completionPositionUnsafe$(Completions.scala:393)
+	at scala.meta.internal.pc.MetalsGlobal.completionPositionUnsafe(MetalsGlobal.scala:23)
+	at scala.meta.internal.pc.Completions.completionPosition(Completions.scala:385)
+	at scala.meta.internal.pc.Completions.completionPosition$(Completions.scala:370)
+	at scala.meta.internal.pc.MetalsGlobal.completionPosition(MetalsGlobal.scala:23)
+	at scala.meta.internal.pc.CompletionProvider.safeCompletionsAt(CompletionProvider.scala:403)
+	at scala.meta.internal.pc.CompletionProvider.completions(CompletionProvider.scala:47)
+	at scala.meta.internal.pc.ScalaPresentationCompiler.$anonfun$complete$1(ScalaPresentationCompiler.scala:87)
+	at scala.meta.internal.pc.CompilerAccess.withSharedCompiler(CompilerAccess.scala:120)
+	at scala.meta.internal.pc.CompilerAccess.$anonfun$withInterruptableCompiler$1(CompilerAccess.scala:77)
+	at scala.meta.internal.pc.CompilerAccess.$anonfun$onCompilerJobQueue$1(CompilerAccess.scala:198)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:73)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+
+set 27, 2019 12:57:08 AM scala.meta.internal.pc.Completions completionPosition
+GRAVE: null
+java.lang.NullPointerException
+	at scala.meta.internal.pc.Completions$CompletionPosition$Override.<init>(Completions.scala:1034)
+	at scala.meta.internal.pc.Completions.completionPositionUnsafe(Completions.scala:472)
+	at scala.meta.internal.pc.Completions.completionPositionUnsafe$(Completions.scala:393)
+	at scala.meta.internal.pc.MetalsGlobal.completionPositionUnsafe(MetalsGlobal.scala:23)
+	at scala.meta.internal.pc.Completions.completionPosition(Completions.scala:385)
+	at scala.meta.internal.pc.Completions.completionPosition$(Completions.scala:370)
+	at scala.meta.internal.pc.MetalsGlobal.completionPosition(MetalsGlobal.scala:23)
+	at scala.meta.internal.pc.CompletionProvider.safeCompletionsAt(CompletionProvider.scala:403)
+	at scala.meta.internal.pc.CompletionProvider.completions(CompletionProvider.scala:47)
+	at scala.meta.internal.pc.ScalaPresentationCompiler.$anonfun$complete$1(ScalaPresentationCompiler.scala:87)
+	at scala.meta.internal.pc.CompilerAccess.withSharedCompiler(CompilerAccess.scala:120)
+	at scala.meta.internal.pc.CompilerAccess.$anonfun$withInterruptableCompiler$1(CompilerAccess.scala:77)
+	at scala.meta.internal.pc.CompilerAccess.$anonfun$onCompilerJobQueue$1(CompilerAccess.scala:198)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:73)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+
+set 27, 2019 12:57:08 AM scala.meta.internal.pc.Completions completionPosition
+GRAVE: null
+java.lang.NullPointerException
+	at scala.meta.internal.pc.Completions$CompletionPosition$Override.<init>(Completions.scala:1034)
+	at scala.meta.internal.pc.Completions.completionPositionUnsafe(Completions.scala:472)
+	at scala.meta.internal.pc.Completions.completionPositionUnsafe$(Completions.scala:393)
+	at scala.meta.internal.pc.MetalsGlobal.completionPositionUnsafe(MetalsGlobal.scala:23)
+	at scala.meta.internal.pc.Completions.completionPosition(Completions.scala:385)
+	at scala.meta.internal.pc.Completions.completionPosition$(Completions.scala:370)
+	at scala.meta.internal.pc.MetalsGlobal.completionPosition(MetalsGlobal.scala:23)
+	at scala.meta.internal.pc.CompletionProvider.safeCompletionsAt(CompletionProvider.scala:403)
+	at scala.meta.internal.pc.CompletionProvider.completions(CompletionProvider.scala:47)
+	at scala.meta.internal.pc.ScalaPresentationCompiler.$anonfun$complete$1(ScalaPresentationCompiler.scala:87)
+	at scala.meta.internal.pc.CompilerAccess.withSharedCompiler(CompilerAccess.scala:120)
+	at scala.meta.internal.pc.CompilerAccess.$anonfun$withInterruptableCompiler$1(CompilerAccess.scala:77)
+	at scala.meta.internal.pc.CompilerAccess.$anonfun$onCompilerJobQueue$1(CompilerAccess.scala:198)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:73)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+
+set 27, 2019 12:57:09 AM scala.meta.internal.pc.Completions completionPosition
+GRAVE: null
+java.lang.NullPointerException
+	at scala.meta.internal.pc.Completions$CompletionPosition$Override.<init>(Completions.scala:1034)
+	at scala.meta.internal.pc.Completions.completionPositionUnsafe(Completions.scala:472)
+	at scala.meta.internal.pc.Completions.completionPositionUnsafe$(Completions.scala:393)
+	at scala.meta.internal.pc.MetalsGlobal.completionPositionUnsafe(MetalsGlobal.scala:23)
+	at scala.meta.internal.pc.Completions.completionPosition(Completions.scala:385)
+	at scala.meta.internal.pc.Completions.completionPosition$(Completions.scala:370)
+	at scala.meta.internal.pc.MetalsGlobal.completionPosition(MetalsGlobal.scala:23)
+	at scala.meta.internal.pc.CompletionProvider.safeCompletionsAt(CompletionProvider.scala:403)
+	at scala.meta.internal.pc.CompletionProvider.completions(CompletionProvider.scala:47)
+	at scala.meta.internal.pc.ScalaPresentationCompiler.$anonfun$complete$1(ScalaPresentationCompiler.scala:87)
+	at scala.meta.internal.pc.CompilerAccess.withSharedCompiler(CompilerAccess.scala:120)
+	at scala.meta.internal.pc.CompilerAccess.$anonfun$withInterruptableCompiler$1(CompilerAccess.scala:77)
+	at scala.meta.internal.pc.CompilerAccess.$anonfun$onCompilerJobQueue$1(CompilerAccess.scala:198)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:73)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+
+set 27, 2019 12:57:09 AM scala.meta.internal.pc.Completions completionPosition
+GRAVE: null
+java.lang.NullPointerException
+	at scala.meta.internal.pc.Completions$CompletionPosition$Override.<init>(Completions.scala:1034)
+	at scala.meta.internal.pc.Completions.completionPositionUnsafe(Completions.scala:472)
+	at scala.meta.internal.pc.Completions.completionPositionUnsafe$(Completions.scala:393)
+	at scala.meta.internal.pc.MetalsGlobal.completionPositionUnsafe(MetalsGlobal.scala:23)
+	at scala.meta.internal.pc.Completions.completionPosition(Completions.scala:385)
+	at scala.meta.internal.pc.Completions.completionPosition$(Completions.scala:370)
+	at scala.meta.internal.pc.MetalsGlobal.completionPosition(MetalsGlobal.scala:23)
+	at scala.meta.internal.pc.CompletionProvider.safeCompletionsAt(CompletionProvider.scala:403)
+	at scala.meta.internal.pc.CompletionProvider.completions(CompletionProvider.scala:47)
+	at scala.meta.internal.pc.ScalaPresentationCompiler.$anonfun$complete$1(ScalaPresentationCompiler.scala:87)
+	at scala.meta.internal.pc.CompilerAccess.withSharedCompiler(CompilerAccess.scala:120)
+	at scala.meta.internal.pc.CompilerAccess.$anonfun$withInterruptableCompiler$1(CompilerAccess.scala:77)
+	at scala.meta.internal.pc.CompilerAccess.$anonfun$onCompilerJobQueue$1(CompilerAccess.scala:198)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:73)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+
+set 27, 2019 12:57:14 AM scala.meta.internal.pc.Completions completionPosition
+GRAVE: null
+java.lang.NullPointerException
+	at scala.meta.internal.pc.Completions$CompletionPosition$Override.<init>(Completions.scala:1034)
+	at scala.meta.internal.pc.Completions.completionPositionUnsafe(Completions.scala:472)
+	at scala.meta.internal.pc.Completions.completionPositionUnsafe$(Completions.scala:393)
+	at scala.meta.internal.pc.MetalsGlobal.completionPositionUnsafe(MetalsGlobal.scala:23)
+	at scala.meta.internal.pc.Completions.completionPosition(Completions.scala:385)
+	at scala.meta.internal.pc.Completions.completionPosition$(Completions.scala:370)
+	at scala.meta.internal.pc.MetalsGlobal.completionPosition(MetalsGlobal.scala:23)
+	at scala.meta.internal.pc.CompletionProvider.safeCompletionsAt(CompletionProvider.scala:403)
+	at scala.meta.internal.pc.CompletionProvider.completions(CompletionProvider.scala:47)
+	at scala.meta.internal.pc.ScalaPresentationCompiler.$anonfun$complete$1(ScalaPresentationCompiler.scala:87)
+	at scala.meta.internal.pc.CompilerAccess.withSharedCompiler(CompilerAccess.scala:120)
+	at scala.meta.internal.pc.CompilerAccess.$anonfun$withInterruptableCompiler$1(CompilerAccess.scala:77)
+	at scala.meta.internal.pc.CompilerAccess.$anonfun$onCompilerJobQueue$1(CompilerAccess.scala:198)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:73)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+
+set 27, 2019 12:57:14 AM scala.meta.internal.pc.Completions completionPosition
+GRAVE: null
+java.lang.NullPointerException
+	at scala.meta.internal.pc.Completions$CompletionPosition$Override.<init>(Completions.scala:1034)
+	at scala.meta.internal.pc.Completions.completionPositionUnsafe(Completions.scala:472)
+	at scala.meta.internal.pc.Completions.completionPositionUnsafe$(Completions.scala:393)
+	at scala.meta.internal.pc.MetalsGlobal.completionPositionUnsafe(MetalsGlobal.scala:23)
+	at scala.meta.internal.pc.Completions.completionPosition(Completions.scala:385)
+	at scala.meta.internal.pc.Completions.completionPosition$(Completions.scala:370)
+	at scala.meta.internal.pc.MetalsGlobal.completionPosition(MetalsGlobal.scala:23)
+	at scala.meta.internal.pc.CompletionProvider.safeCompletionsAt(CompletionProvider.scala:403)
+	at scala.meta.internal.pc.CompletionProvider.completions(CompletionProvider.scala:47)
+	at scala.meta.internal.pc.ScalaPresentationCompiler.$anonfun$complete$1(ScalaPresentationCompiler.scala:87)
+	at scala.meta.internal.pc.CompilerAccess.withSharedCompiler(CompilerAccess.scala:120)
+	at scala.meta.internal.pc.CompilerAccess.$anonfun$withInterruptableCompiler$1(CompilerAccess.scala:77)
+	at scala.meta.internal.pc.CompilerAccess.$anonfun$onCompilerJobQueue$1(CompilerAccess.scala:198)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:73)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+
+set 27, 2019 12:57:14 AM scala.meta.internal.pc.Completions completionPosition
+GRAVE: null
+java.lang.NullPointerException
+	at scala.meta.internal.pc.Completions$CompletionPosition$Override.<init>(Completions.scala:1034)
+	at scala.meta.internal.pc.Completions.completionPositionUnsafe(Completions.scala:472)
+	at scala.meta.internal.pc.Completions.completionPositionUnsafe$(Completions.scala:393)
+	at scala.meta.internal.pc.MetalsGlobal.completionPositionUnsafe(MetalsGlobal.scala:23)
+	at scala.meta.internal.pc.Completions.completionPosition(Completions.scala:385)
+	at scala.meta.internal.pc.Completions.completionPosition$(Completions.scala:370)
+	at scala.meta.internal.pc.MetalsGlobal.completionPosition(MetalsGlobal.scala:23)
+	at scala.meta.internal.pc.CompletionProvider.safeCompletionsAt(CompletionProvider.scala:403)
+	at scala.meta.internal.pc.CompletionProvider.completions(CompletionProvider.scala:47)
+	at scala.meta.internal.pc.ScalaPresentationCompiler.$anonfun$complete$1(ScalaPresentationCompiler.scala:87)
+	at scala.meta.internal.pc.CompilerAccess.withSharedCompiler(CompilerAccess.scala:120)
+	at scala.meta.internal.pc.CompilerAccess.$anonfun$withInterruptableCompiler$1(CompilerAccess.scala:77)
+	at scala.meta.internal.pc.CompilerAccess.$anonfun$onCompilerJobQueue$1(CompilerAccess.scala:198)
+	at scala.meta.internal.pc.CompilerJobQueue$Job.run(CompilerJobQueue.scala:73)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+set 27, 2019 1:07:22 AM scala.meta.internal.pc.CompilerAccess handleError
+GRAVE: null
+java.lang.NullPointerException
+	at scala.meta.internal.pc.HoverProvider.seenFromType(HoverProvider.scala:106)
+	at scala.meta.internal.pc.HoverProvider.hover(HoverProvider.scala:42)
+
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\StoreMap.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+set 27, 2019 1:42:31 AM scala.meta.internal.pc.CompilerAccess handleError
+GRAVE: null
+java.lang.NullPointerException
+	at scala.meta.internal.pc.HoverProvider.hover(HoverProvider.scala:37)
+
+set 27, 2019 1:42:32 AM scala.meta.internal.pc.CompilerAccess handleError
+GRAVE: null
+java.lang.NullPointerException
+	at scala.meta.internal.pc.HoverProvider.hover(HoverProvider.scala:37)
+
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\ScalarestwebappStack.scala
+set 27, 2019 1:48:15 AM scala.meta.internal.pc.CompilerAccess handleError
+GRAVE: null
+java.lang.NullPointerException
+	at scala.meta.internal.pc.HoverProvider.hover(HoverProvider.scala:37)
+
+set 27, 2019 1:48:16 AM scala.meta.internal.pc.CompilerAccess handleError
+GRAVE: null
+java.lang.NullPointerException
+	at scala.meta.internal.pc.HoverProvider.hover(HoverProvider.scala:37)
+
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\ScalarestwebappStack.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\ScalarestwebappStack.scala
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\ScalarestwebappStack.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\ScalarestwebappStack.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\ScalarestwebappStack.scala
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build tool detected in workspace 'C:\Users\Asus\Desktop\invilia\code\scalaRestExample'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+WARN  no build target: C:\Users\Asus\Desktop\invilia\code\scalaRestExample\scalatra\scalarestwebapp\src\main\scala\com\acme\scala\rest\MyScalatraServlet.scala
+set 27, 2019 2:35:05 AM scala.meta.internal.pc.CompilerAccess handleError
+GRAVE: null
+java.lang.NullPointerException
+	at scala.meta.internal.pc.HoverProvider.seenFromType(HoverProvider.scala:106)
+	at scala.meta.internal.pc.HoverProvider.hover(HoverProvider.scala:42)
+
